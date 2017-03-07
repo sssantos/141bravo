@@ -1,13 +1,13 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[18]:
 
 import Tasks0 
 top100songs = Tasks0.top100songs
 
 
-# In[4]:
+# In[19]:
 
 import requests
 import requests_cache
@@ -43,38 +43,32 @@ def getLyrics(song, newUrl = ''):
     return({'Url':lyric_url, 'Lyric': lyrics})
 
 
-# In[5]:
-
-getLyrics(top100songs.loc[80])
-top100songs.loc[80]
-
-
-# In[6]:
+# In[20]:
 
 result = [getLyrics(row) for idx, row in top100songs.iterrows()]
 result = pd.DataFrame(result)
 
 
-# In[7]:
+# In[21]:
 
 #Locate songs that couldn't be found using function
 missing =result[result['Url'] == ""].index
 top100songs.loc[missing]
 
 
-# In[8]:
+# In[22]:
 
 notFoundUrls = ["http://www.songlyrics.com/elton-john-billy-joel/candle-in-the-wind-lyrics/", "http://www.songlyrics.com/percy-faith/theme-from-a-summer-place-lyrics/","http://www.songlyrics.com/jewel-feat-kelly-clarkson/foolish-games-lyrics/", ""]
 
 
-# In[9]:
+# In[23]:
 
 result.loc[53,'Lyric':'Url'] = getLyrics(top100songs.loc[53], newUrl = notFoundUrls[0])
 result.loc[80,'Lyric':'Url'] = getLyrics(top100songs.loc[80], newUrl = notFoundUrls[1])
 result.loc[83,'Lyric':'Url'] = getLyrics(top100songs.loc[83], newUrl = notFoundUrls[2])
 
 
-# In[10]:
+# In[24]:
 
 song = top100songs.loc[60]
 artist = song['Artist']
@@ -88,7 +82,8 @@ lyrics = tmp[0].get_text()
 result.loc[60,'Lyric': 'Url'] = {'Lyric': lyrics, 'Url': lyric_url}
 
 
-# In[12]:
+# In[25]:
 
+result = pd.concat([top100songs.reset_index(drop=True), result], axis = 1)
 result
 
