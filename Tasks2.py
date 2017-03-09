@@ -160,7 +160,8 @@ def getSpotifyID(search, token):
               'loudness': audio_features['loudness'],
               'mode': audio_features['mode'],
               'speechiness': audio_features['speechiness'],
-              'tempo': audio_features['tempo']}
+              'tempo': audio_features['tempo'],
+             'valence': audio_features['valence']}
     return result
 
 
