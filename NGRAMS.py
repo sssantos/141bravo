@@ -181,7 +181,7 @@ song_trigram = [{"trigram": [" ".join(key_tuple) for key_tuple in trigram.keys()
 
 # In[19]:
 
-corpus_bigram
+corpus_trigram["trigram"]
 
 
 # In[20]:
@@ -199,7 +199,7 @@ trigram_in_song = [sum([ctrigram in song["trigram"] for song in song_trigram ]) 
 non_unique_trigram_indices_songs = [(trigram > 1,trigram) for trigram in trigram_in_song]
 
 
-# In[28]:
+# In[22]:
 
 from itertools import compress
 non_unique_bigrams = list(compress(corpus_bigram["bigram"], [x[0] for x in non_unique_bigram_indices_songs]))
@@ -212,19 +212,76 @@ shared_bigrams = {"bigram": non_unique_bigrams, "freq": nu_bigram_freq, "songs":
 shared_trigrams = {"trigram": non_unique_trigrams, "freq": nu_trigram_freq, "songs": songs_per_trigram}
 
 
-# In[36]:
+# In[34]:
 
 import pandas as pd
 # Frequency 
 # The dictionaries "shared_bigrams" and "shared_trigrams" contain
 # the bigram, the number of times occurred, and the number of songs occured in
 # pd.DataFrame(shared_bigrams).sort_values(by="songs", ascending = False)
-# pd.DataFframe(shared_trigrams)
+tri_by_songs = pd.DataFrame(shared_trigrams).sort_values(by="songs", ascending = False)
+tri_by_freq  = pd.DataFrame(shared_trigrams).sort_values(by="freq", ascending = False)
+bi_by_songs = pd.DataFrame(shared_bigrams).sort_values(by="songs", ascending = False)
+bi_by_freq  = pd.DataFrame(shared_bigrams).sort_values(by="freq", ascending = False)
 
 
-# In[32]:
+# In[27]:
+
+from plotly import __version__
+from plotly.offline import download_plotlyjs, init_notebook_mode, plot, iplot
+import matplotlib.pyplot as plt
 
 
+# In[70]:
+
+tri_by_song_y = list(tri_by_songs["songs"])[0:16]
+plt.bar(range(16), tri_by_song_y, 1/1.2, color = "blue")
+plt.xticks(range(16), list(tri_by_songs["trigram"])[0:16])
+plt.xticks(rotation = 70)
+plt.ylim([0,40])
+plt.xlabel("trigram")
+plt.ylabel("songs occured in")
+plt.title("Number of songs trigram occured in")
+plt.show()
+
+
+# In[71]:
+
+bi_by_song_y = list(bi_by_songs["songs"])[0:16]
+plt.bar(range(16), bi_by_song_y, 1/1.2, color = "blue")
+plt.xticks(range(16), list(bi_by_songs["bigram"])[0:16])
+plt.xticks(rotation = 70)
+plt.ylim([0,40])
+plt.xlabel("bigram")
+plt.ylabel("songs occured in")
+plt.title("Number of songs bigram occured in")
+plt.show()
+
+
+# In[73]:
+
+tri_by_freq_y = list(tri_by_freq["freq"])[0:16]
+plt.bar(range(16), tri_by_freq_y, 1/1.2, color = "red")
+plt.xticks(range(16), list(tri_by_freq["trigram"])[0:16])
+plt.xticks(rotation = 70)
+plt.ylim([0,155])
+plt.xlabel("trigram")
+plt.ylabel("frequency")
+plt.title("Trigram frequency within the top 100")
+plt.show()
+
+
+# In[74]:
+
+bi_by_freq_y = list(bi_by_freq["freq"])[0:16]
+plt.bar(range(16), bi_by_freq_y, 1/1.2, color = "red")
+plt.xticks(range(16), list(bi_by_freq["bigram"])[0:16])
+plt.xticks(rotation = 70)
+plt.ylim([0,155])
+plt.xlabel("bigram")
+plt.ylabel("songs occured in")
+plt.title("Trigram frequency within the top 100")
+plt.show()
 
 
 # In[ ]:
