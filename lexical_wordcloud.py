@@ -10,7 +10,7 @@ lex_df["Lexical"] = lexical_no_stop
 def word_cloud_time(df, beginYear, endYear):
     # get range of entries
     temp = df[df["Year"] >= beginYear]
-    lex_list = temp[temp["Year"] <= 1969]["Lexical"]
+    lex_list = temp[temp["Year"] <= endYear]["Lexical"]
     
     #lex_list = df[(df["Year"] >= beginYear) and (df["Year"] <= endYear)]
     # get the lexical
