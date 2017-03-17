@@ -3,7 +3,7 @@
 
 # In[ ]:
 
-lexical_no_stop = lexical_words_in_songs_no_top
+lexical_no_stop = lexical_words_in_songs_no_stop
 lex_df = final_data
 lex_df["Lexical"] = lexical_no_stop
 
@@ -19,7 +19,7 @@ def word_cloud_time(df, beginYear, endYear):
     
     #print long_string
     
-     GENERATE WORD CLOUD
+    #GENERATE WORD CLOUD
     wc.generate(long_string)
 
     # COLORING
