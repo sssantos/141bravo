@@ -9,7 +9,7 @@ import Tasks2
 import pandas as pd
 data = Tasks2.final_data
 
-output_file("AccousticFeaturePlot.html")
+output_file("AudioFeaturePlot.html")
 
 source = ColumnDataSource(data = {
     "x": data['Year'],
@@ -34,7 +34,7 @@ hover = HoverTool(tooltips=[
     ('Artist', '@Artist'),
     ('(x,y)', '($x,$y)')])
 
-plot = figure(title="Year vs Feature", tools=[hover], plot_width=400,plot_height=400)
+plot = figure(title="Year vs Feature", tools=[hover], plot_width=800,plot_height=400)
 plot.circle(x = "x", y = "y",legend = False, source = source)
 plot.xaxis.axis_label = 'Year'
 plot.yaxis.axis_label = 'Feature'
@@ -48,7 +48,7 @@ callback = CustomJS(args=dict(source=source), code="""
         source.trigger('change');
     """)
 
-select = Select(title="Acoustic Feature:", value="acousticness", options=['acousticness','energy','instrumentalness', 'danceability',
+select = Select(title="Audio Feature:", value="acousticness", options=['acousticness','energy','instrumentalness', 'danceability',
                      'key','liveness','loudness','songLength','speechiness','tempo','valence'])
 select.js_on_change('value', callback)
 layout = column(select, plot)
