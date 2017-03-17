@@ -34,14 +34,17 @@ hover = HoverTool(tooltips=[
     ('Artist', '@Artist'),
     ('(x,y)', '($x,$y)')])
 
-plot = figure(title="Year vs Acousticness", tools=[hover], plot_width=400,plot_height=400)
+plot = figure(title="Year vs Feature", tools=[hover], plot_width=400,plot_height=400)
 plot.circle(x = "x", y = "y",legend = False, source = source)
+plot.xaxis.axis_label = 'Year'
+plot.yaxis.axis_label = 'Feature'
 # In the JavaScript code, `cb_obj` is the widget object and `source` is the
 # data object.
 callback = CustomJS(args=dict(source=source), code="""
         var data = source.data;
         x = data['x'];
         data['y'] = data[cb_obj.value];
+        title: data['Title']
         source.trigger('change');
     """)
 
