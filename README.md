@@ -16,4 +16,4 @@ Analysis Part I Files
 Analysis Part II Files
 - LovetoCuss.ipynb - Examines the number times 'love' or cuss words appear in the Year-End Top 100 songs.
 - GoldenEra.ipynb, GoldenEra.py - Data exploration - finding a “Golden Period”
-- TimeAnalysis.ipynb, TimeAnalysis.py - # of repeat artists, word clouds of lexical words per decade, lexical density per decade
+- TimeAnalysis.ipynb, TimeAnalysis.py - number of repeat artists, word clouds of lexical words per decade, lexical density per decade
